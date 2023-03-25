@@ -1,11 +1,11 @@
 #include "utils/Vector.hpp"
 
-Vector func() {
-	Vector a({ 2, 3, 4 });
-	a.push_back(1);
-	a.print();
-	return a;
-}
+//Vector func() {
+//	Vector a({ 2, 3, 4 });
+//	a.push_back(1);
+//	a.print();
+//	return a;
+//}
 
 int main() {
 	/*Vector v1({ 1, 2, 3 });
@@ -37,4 +37,12 @@ int main() {
 	v2[1] = 2;
 	v2[2] = 3;
 	v2.print();*/
+
+	Vector<int> vint({1, 2, 3});
+	Vector<int> vint2{ Vector<int>(vint) };
+	Vector<double> vdoub({1.2, 2.3, 3.4});
+	vint.print();
+	vdoub.print();
+	add(vint, vint2).print();
+	std::cout << dotProduct(vint, vint2) << std::endl;
 }

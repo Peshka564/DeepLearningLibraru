@@ -2,39 +2,44 @@
 #include <initializer_list>
 
 // class methods
-Vector::Vector() : vector(nullptr), capacity(0), length(0) {};
+template <typename T>
+Vector<T>::Vector() : vector(nullptr), capacity(0), length(0) {};
 
-Vector::Vector(std::initializer_list<double> il) {
+template <typename T>
+Vector<T>::Vector(std::initializer_list<T> il) {
 	// utilizing iterators and initLists
-	for (double d : il) {
+	for (T d : il) {
 		push_back(d);
 	}
 }
 
-Vector::Vector(int index) {
+template <typename T>
+Vector<T>::Vector(int index) {
 	if (index < 0) {
 		throw std::invalid_argument("Invalid vector size");
 	}
-	vector = new double[index];
+	vector = new T[index];
 	length = 0;
 	capacity = index;
 }
 
-Vector::Vector(const Vector& v) {
-	vector = new double[v.capacity];
+template <typename T>
+Vector<T>::Vector(const Vector<T>& v) {
+	vector = new T[v.capacity];
 	length = v.length;
 	capacity = v.capacity;
 	copy(vector, v.vector);
 }
 
-Vector& Vector::operator=(const Vector& v) {
+template <typename T>
+Vector<T>& Vector<T>::operator=(const Vector<T>& v) {
 	// avoid deleting own memory
 	if (this != &v) {
 		// avoid memory leak
 		// if size is bigger than v.size - don't deallocate
 		delete[] vector;
 		// copy
-		vector = new double[v.capacity];
+		vector = new T[v.capacity];
 		length = v.length;
 		capacity = v.capacity;
 		copy(vector, v.vector);
@@ -42,7 +47,8 @@ Vector& Vector::operator=(const Vector& v) {
 	return *this;
 }
 
-Vector::Vector(Vector&& v) noexcept {
+template <typename T>
+Vector<T>::Vector(Vector<T>&& v) noexcept {
 	vector = v.vector;
 	length = v.length;
 	capacity = v.capacity;
@@ -52,7 +58,8 @@ Vector::Vector(Vector&& v) noexcept {
 	v.capacity = 0;
 }
 
-Vector& Vector::operator=(Vector&& v) noexcept {
+template <typename T>
+Vector<T>& Vector<T>::operator=(Vector<T>&& v) noexcept {
 	if (this != &v) {
 		clear();
 		vector = v.vector;
@@ -66,31 +73,35 @@ Vector& Vector::operator=(Vector&& v) noexcept {
 	return *this;
 }
 
-void Vector::pop_back() {
+template <typename T>
+void Vector<T>::pop_back() {
 	if (length) {
 		length--;
 	}
 }
 
-void Vector::push_back(double d) {
+template <typename T>
+void Vector<T>::push_back(T d) {
 	reallocate();
 	vector[length++] = d;
 }
 
-void Vector::insert(int index, double d) {
+template <typename T>
+void Vector<T>::insert(int index, T d) {
 	if (index < 0 || index > length) throw std::invalid_argument("Invalid vector index");
 	if (index == length) {
 		push_back(d);
 		return;
 	}
 	push_back(vector[length - 1]);
-	for (int i = length - 2; i > index; i--) {
+	for (int i = (int)length - 2; i > index; i--) {
 		vector[i] = vector[i - 1];
 	}
 	vector[index] = d;
 }
 
-void Vector::remove(int index) {
+template <typename T>
+void Vector<T>::remove(int index) {
 	if (index < 0 || index >= length) throw std::invalid_argument("Invalid vector index");
 	if (index == length - 1) {
 		pop_back();
@@ -102,100 +113,150 @@ void Vector::remove(int index) {
 	length--;
 }
 
-void Vector::clear() {
+template <typename T>
+void Vector<T>::clear() {
 	delete[] vector;
 	vector = nullptr;
 	length = 0;
 	capacity = 0;
 }
 
-double Vector::operator[](int index) const {
+template <typename T>
+T Vector<T>::operator[](int index) const {
 	if (index < 0 || (size_t)index >= length) throw std::invalid_argument("Invalid vector indexing");
 	return vector[index];
 }
 
-double& Vector::operator[](int index) {
+template <typename T>
+T& Vector<T>::operator[](int index) {
 	if (index < 0 || (size_t)index >= length) throw std::invalid_argument("Invalid vector indexing");
 	return vector[index];
 }
 
-void Vector::print() const {
+template <typename T>
+void Vector<T>::print() const {
 	for (size_t i = 0; i < length; i++) {
 		std::cout << vector[i] << " ";
 	}
 	std::cout << std::endl;
 }
 
-size_t Vector::size() const {
+template <typename T>
+size_t Vector<T>::size() const {
 	return length;
 }
 
-bool Vector::isEmpty() const {
+template <typename T>
+bool Vector<T>::isEmpty() const {
 	return !size();
 }
 
-void Vector::reallocate() {
+template <typename T>
+void Vector<T>::reallocate() {
 	if (length == capacity) {
 		capacity = !capacity + capacity * 2;
-		double* arr = new double[capacity];
+		T* arr = new T[capacity];
 		copy(arr, vector);
 		delete[] vector;
 		vector = arr;
 	}
 }
 
-void Vector::copy(double* dest, double* src) {
+template <typename T>
+void Vector<T>::copy(T* dest, T* src) {
 	for (size_t i = 0; i < length; i++) {
 		dest[i] = src[i];
 	}
 }
 
-double Vector::normal() const {
-	double res = 0;
+template <typename T>
+T Vector<T>::normal() const {
+	T res = 0;
 	for (size_t i = 0; i < length; i++) {
 		res += vector[i] * vector[i];
 	}
 	return std::sqrt(res);
 }
 
-Vector::~Vector() {
+template <typename T>
+Vector<T>::~Vector() {
 	clear();
 }
 
 // outside functions
 
-Vector add(const Vector& a, const Vector& b) {
+template <typename T>
+Vector<T> add(const Vector<T>& a, const Vector<T>& b) {
 	if (a.size() != b.size()) throw std::invalid_argument("Sizes aren't matching");
-	Vector c;
+	Vector<T> c;
 	for (size_t i = 0; i < a.size(); i++) {
 		c.push_back(a[i] + b[i]);
 	}
 	return c;
 }
 
-Vector subtract(const Vector& a, const Vector& b) {
+template <typename T>
+Vector<T> subtract(const Vector<T>& a, const Vector<T>& b) {
 	if (a.size() != b.size()) throw std::invalid_argument("Sizes aren't matching");
-	Vector c;
+	Vector<T> c;
 	for (size_t i = 0; i < a.size(); i++) {
 		c.push_back(a[i] - b[i]);
 	}
 	return c;
 }
 
-Vector multiply(const Vector& a, const Vector& b) {
+template <typename T>
+Vector<T> multiply(const Vector<T>& a, const Vector<T>& b) {
 	if (a.size() != b.size()) throw std::invalid_argument("Sizes aren't matching");
-	Vector c;
+	Vector<T> c;
 	for (size_t i = 0; i < a.size(); i++) {
 		c.push_back(a[i] * b[i]);
 	}
 	return c;
 }
 
-double dotProduct(const Vector& a, const Vector& b) {
+template <typename T>
+T dotProduct(const Vector<T>& a, const Vector<T>& b) {
 	if (a.size() != b.size()) throw std::invalid_argument("Sizes aren't matching");
-	double res = 0;
+	T res = 0;
 	for (size_t i = 0; i < a.size(); i++) {
 		res += a[i] * b[i];
 	}
 	return res;
 }
+
+// All necessary numeric types
+template class Vector<int>;
+template class Vector<long>;
+template class Vector<long long>;
+template class Vector<float>;
+template class Vector<double>;
+template class Vector<long double>;
+
+template Vector<int> add<int>(const Vector<int>&, const Vector<int>&);
+template Vector<long> add<long>(const Vector<long>&, const Vector<long>&);
+template Vector<long long> add<long long>(const Vector<long long>&, const Vector<long long>&);
+template Vector<float> add<float>(const Vector<float>&, const Vector<float>&);
+template Vector<double> add<double>(const Vector<double>&, const Vector<double>&);
+template Vector<long double> add<long double>(const Vector<long double>&, const Vector<long double>&);
+
+template Vector<int> subtract<int>(const Vector<int>&, const Vector<int>&);
+template Vector<long> subtract<long>(const Vector<long>&, const Vector<long>&);
+template Vector<long long> subtract<long long>(const Vector<long long>&, const Vector<long long>&);
+template Vector<float> subtract<float>(const Vector<float>&, const Vector<float>&);
+template Vector<double> subtract<double>(const Vector<double>&, const Vector<double>&);
+template Vector<long double> subtract<long double>(const Vector<long double>&, const Vector<long double>&);
+
+template Vector<int> multiply<int>(const Vector<int>&, const Vector<int>&);
+template Vector<long> multiply<long>(const Vector<long>&, const Vector<long>&);
+template Vector<long long> multiply<long long>(const Vector<long long>&, const Vector<long long>&);
+template Vector<float> multiply<float>(const Vector<float>&, const Vector<float>&);
+template Vector<double> multiply<double>(const Vector<double>&, const Vector<double>&);
+template Vector<long double> multiply<long double>(const Vector<long double>&, const Vector<long double>&);
+
+template int dotProduct<int>(const Vector<int>&, const Vector<int>&);
+template long dotProduct<long>(const Vector<long>&, const Vector<long>&);
+template long long dotProduct<long long>(const Vector<long long>&, const Vector<long long>&);
+template float dotProduct<float>(const Vector<float>&, const Vector<float>&);
+template double dotProduct<double>(const Vector<double>&, const Vector<double>&);
+template long double dotProduct<long double>(const Vector<long double>&, const Vector<long double>&);
