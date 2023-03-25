@@ -1,4 +1,3 @@
-//#include <iostream>
 #include "utils/Vector.hpp"
 
 Vector func() {
@@ -9,7 +8,7 @@ Vector func() {
 }
 
 int main() {
-	Vector v1({ 1, 2, 3 });
+	/*Vector v1({ 1, 2, 3 });
 	v1.print();
 
 	v1.push_back(2);
@@ -21,13 +20,21 @@ int main() {
 	b.print();
 	Vector v2({ 1, 2, 3, 4 });
 	v2.print();
-	v2 = func();
-	Vector v3(v2);
+	Vector v3(func());
 	v2.pop_back();
 	v2.print();
 	v3.print();
 	std::cout << v2[2] << std::endl;
 	std::cout << v2.normal() << std::endl;
-	v2[2] = -1 / 2;
+	v2[2] = -1 / 2.0;
 	std::cout << v2[2] << std::endl;
+	v2.insert(2, 69);
+	v2.print();
+	v2.remove(0);
+	v2.print();
+	std::cout << v2.size() << std::endl;
+	v2[0] = 1;
+	v2[1] = 2;
+	v2[2] = 3;
+	v2.print();*/
 }

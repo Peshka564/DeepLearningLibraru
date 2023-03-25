@@ -1,4 +1,4 @@
-#include "Vector.hpp"
+#include "vector.hpp"
 #include <initializer_list>
 
 // class methods
@@ -42,7 +42,7 @@ Vector& Vector::operator=(const Vector& v) {
 	return *this;
 }
 
-Vector::Vector(Vector&& v) {
+Vector::Vector(Vector&& v) noexcept {
 	vector = v.vector;
 	length = v.length;
 	capacity = v.capacity;
@@ -52,7 +52,7 @@ Vector::Vector(Vector&& v) {
 	v.capacity = 0;
 }
 
-Vector& Vector::operator=(Vector&& v) {
+Vector& Vector::operator=(Vector&& v) noexcept {
 	if (this != &v) {
 		clear();
 		vector = v.vector;
@@ -90,6 +90,18 @@ void Vector::insert(int index, double d) {
 	vector[index] = d;
 }
 
+void Vector::remove(int index) {
+	if (index < 0 || index >= length) throw std::invalid_argument("Invalid vector index");
+	if (index == length - 1) {
+		pop_back();
+		return;
+	}
+	for (int i = index; i < length - 1; i++) {
+		vector[i] = vector[i + 1];
+	}
+	length--;
+}
+
 void Vector::clear() {
 	delete[] vector;
 	vector = nullptr;
@@ -105,11 +117,6 @@ double Vector::operator[](int index) const {
 double& Vector::operator[](int index) {
 	if (index < 0 || (size_t)index >= length) throw std::invalid_argument("Invalid vector indexing");
 	return vector[index];
-}
-
-void Vector::setAt(int index, double val) {
-	if (index < 0 || (size_t)index >= length) throw std::invalid_argument("Invalid vector indexing");
-	vector[index] = val;
 }
 
 void Vector::print() const {
@@ -157,7 +164,7 @@ Vector::~Vector() {
 
 // outside functions
 
-Vector add(Vector& a, Vector& b) {
+Vector add(const Vector& a, const Vector& b) {
 	if (a.size() != b.size()) throw std::invalid_argument("Sizes aren't matching");
 	Vector c;
 	for (size_t i = 0; i < a.size(); i++) {
@@ -166,7 +173,7 @@ Vector add(Vector& a, Vector& b) {
 	return c;
 }
 
-Vector subtract(Vector& a, Vector& b) {
+Vector subtract(const Vector& a, const Vector& b) {
 	if (a.size() != b.size()) throw std::invalid_argument("Sizes aren't matching");
 	Vector c;
 	for (size_t i = 0; i < a.size(); i++) {
@@ -175,7 +182,7 @@ Vector subtract(Vector& a, Vector& b) {
 	return c;
 }
 
-Vector multiply(Vector& a, Vector& b) {
+Vector multiply(const Vector& a, const Vector& b) {
 	if (a.size() != b.size()) throw std::invalid_argument("Sizes aren't matching");
 	Vector c;
 	for (size_t i = 0; i < a.size(); i++) {
@@ -184,7 +191,7 @@ Vector multiply(Vector& a, Vector& b) {
 	return c;
 }
 
-double dotProduct(Vector& a, Vector& b) {
+double dotProduct(const Vector& a, const Vector& b) {
 	if (a.size() != b.size()) throw std::invalid_argument("Sizes aren't matching");
 	double res = 0;
 	for (size_t i = 0; i < a.size(); i++) {

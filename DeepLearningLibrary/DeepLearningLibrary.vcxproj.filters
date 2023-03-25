@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="utils\Vector.cpp">
+    <ClCompile Include="utils\vector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Activation.cpp">
@@ -41,7 +41,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="utils\Vector.hpp">
+    <ClInclude Include="utils\vector.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Activation.hpp">

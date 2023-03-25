@@ -1,5 +1,4 @@
 // A custom vector class
-
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
@@ -9,7 +8,6 @@
 
 //namespace utils {
 
-//template
 class Vector {
 private:
 	double* vector;
@@ -28,17 +26,17 @@ public:
 	Vector(const Vector&);
 	Vector& operator=(const Vector&);
 	// move
-	Vector(Vector&&);
-	Vector& operator=(Vector&&);
+	Vector(Vector&&) noexcept;
+	Vector& operator=(Vector&&) noexcept;
 	~Vector();
 
 	// core methods
 	void push_back(double);
 	void pop_back();
 	void insert(int, double);
+	void remove(int);
 	double operator[](int) const;
 	double& operator[](int);
-	void setAt(int, double);
 	void print() const;
 	bool isEmpty() const;
 	void clear();
@@ -50,15 +48,15 @@ public:
 };
 
 // use templates
-//#include "Vector.cpp"
+//#include "vector.cpp"
 
 // vector pointwise add
-Vector add(Vector&, Vector&);
+Vector add(const Vector&, const Vector&);
 // vector pointwise subtract
-Vector subtract(Vector&, Vector&);
+Vector subtract(const Vector&, const Vector&);
 // hadamard product
-Vector multiply(Vector&, Vector&);
+Vector multiply(const Vector&, const Vector&);
 // dot product
-double dotProduct(Vector&, Vector&);
+double dotProduct(const Vector&, const Vector&);
 
 #endif // !VECTOR_HPP
