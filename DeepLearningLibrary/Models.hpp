@@ -10,8 +10,9 @@ private:
 	//unsigned miniBatchSize;
 	std::vector<Dense> layers;
 
-	// single training input
+	// ff for a single training input
 	std::vector<double> feedForward(std::vector<double>);
+	// maybe specified by user
 	std::vector<bool> oneHotEncode(double);
 	void backprop(const std::vector<double>&, const std::vector<bool>&);
 	void gradientDescent(const std::vector<std::vector<double>>&, const std::vector<std::vector<bool>>&, double);

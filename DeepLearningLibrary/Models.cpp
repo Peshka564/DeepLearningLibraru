@@ -5,7 +5,9 @@
 #include "Utils.hpp"
 #include "Cost.hpp"
 
-Sequential::Sequential(std::initializer_list<Dense> list) : layers(list) {};
+Sequential::Sequential(std::initializer_list<Dense> list) : layers(list) {
+	if (!layers.size()) throw std::exception();
+};
 
 std::vector<double> Sequential::feedForward(std::vector<double> trainingInput) {
 	for (size_t i = 0; i < layers.size(); i++) {
@@ -68,17 +70,19 @@ void Sequential::gradientDescent(const std::vector<std::vector<double>>& trainin
 }
 
 void Sequential::train(const std::vector<std::vector<double>>& trainingData, const std::vector<double>& answers, unsigned epochs, double learningRate) {
-	std::vector<std::vector<bool>> labels;
+	std::vector<std::vector<bool>> labels(answers.size(), std::vector<bool>(10));
 	for (size_t i = 0; i < answers.size(); i++) {
 		labels[i] = oneHotEncode(answers[i]);
 	}
 
-	// check for empty training data
-	layers[0].initializeParams(trainingData[0].size());
+	std::cout << "Passed labeling" << std::endl;
 
+	// >check for empty training data
+	layers[0].initializeParams(trainingData[0].size());
 	for (size_t i = 1; i < layers.size(); i++) {
 		layers[i].initializeParams(layers[i - 1].getNodesOut());
 	}
+	std::cout << "Passed init" << std::endl;
 
 	for (unsigned epoch = 1; epoch <= epochs; epoch++) {
 		std::cout << "Epoch: " << epoch << std::endl;

@@ -12,18 +12,14 @@ weights({}), biases({}), output({}), gradientWeights({}), gradientBiases({})
 
 // Initialize weights and biases(currently to zero)
 void Dense::initializeParams(size_t nodes) {
+	std::cout << nodes << ", " << nodesOut << std::endl;
 	nodesIn = nodes;
-	weights = std::vector<std::vector<double>>(nodesOut);
-	for (size_t i = 0; i < nodes; i++) {
-		weights[i] = std::vector<double>(nodesIn, 0);
-	}
+	// add gaussian randomness
+	weights = std::vector<std::vector<double>>(nodesOut, std::vector<double>(nodes, 0));
 	biases = std::vector<double>(nodesOut, 0);
 	output = std::vector<double>(nodesOut);
 	// must be zeros
-	gradientWeights = std::vector<std::vector<double>>(nodesOut);
-	for (size_t i = 0; i < nodes; i++) {
-		gradientWeights[i] = std::vector<double>(nodesIn, 0);
-	}
+	gradientWeights = std::vector<std::vector<double>>(nodesOut, std::vector<double>(nodes, 0));
 	gradientBiases = std::vector<double>(nodesOut, 0);
 	gradientOutput = std::vector<double>(nodesOut);
 }
@@ -68,10 +64,7 @@ void Dense::updateParameters(size_t numSamples, double learningRate) {
 	for (size_t i = 0; i < biases.size(); i++) {
 		biases[i] -= learningRate * gradientBiases[i] / numSamples;
 	}
-	gradientWeights = std::vector<std::vector<double>>(nodesOut);
-	for (size_t i = 0; i < nodesIn; i++) {
-		gradientWeights[i] = std::vector<double>(nodesIn, 0);
-	}
+	gradientWeights = std::vector<std::vector<double>>(nodesOut, std::vector<double>(nodesIn, 0));
 	gradientBiases = std::vector<double>(nodesOut, 0);
 }
 
