@@ -1,5 +1,5 @@
 #include <iostream>
-#include <random> // !!!!!
+#include <random>
 #include <vector>
 #include "Layers.hpp"
 #include "Activation.hpp"
@@ -14,10 +14,25 @@ weights({}), biases({}), output({}), gradientWeights({}), gradientBiases({})
 void Dense::initializeParams(size_t nodes) {
 	std::cout << nodes << ", " << nodesOut << std::endl;
 	nodesIn = nodes;
-	// add gaussian randomness
-	weights = std::vector<std::vector<double>>(nodesOut, std::vector<double>(nodes, 0));
-	biases = std::vector<double>(nodesOut, 0);
+	
+	// generate random gaussian distributed numbers
+	std::random_device rd;
+	std::mt19937 e2(rd());
+	e2.seed(1);
+	std::normal_distribution<> dist(0, 1);
+
+	weights = std::vector<std::vector<double>>(nodesOut, std::vector<double>(nodes));
+	for (size_t i = 0; i < weights.size(); i++) {
+		for (size_t j = 0; j < weights[0].size(); j++) {
+			weights[i][j] = dist(e2);
+		}
+	}
+	biases = std::vector<double>(nodesOut);
+	for (size_t i = 0; i < biases.size(); i++) {
+		biases[i] = dist(e2);
+	}
 	output = std::vector<double>(nodesOut);
+
 	// must be zeros
 	gradientWeights = std::vector<std::vector<double>>(nodesOut, std::vector<double>(nodes, 0));
 	gradientBiases = std::vector<double>(nodesOut, 0);

@@ -25,7 +25,7 @@ void readFile(const char* name, std::vector<std::vector<double>>& x, std::vector
 int main() {
 	const size_t numSamples = 1000;
 	const unsigned epochs = 100;
-	const double learningRate = 0.001;
+	const double learningRate = 0.01;
 	//std::vector<std::vector<double>> training_x(50000, std::vector<double>(784));
 	//std::vector<double> training_y(50000);
 	//readFile("mnist_training.txt", training_x, training_y);
