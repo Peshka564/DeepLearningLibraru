@@ -25,9 +25,9 @@ double Sequential::calculateCost(const std::vector<std::vector<double>>& trainin
 }
 
 // 10 outputs representing each digit guess - {0, 1}
-std::vector<bool> Sequential::oneHotEncode(unsigned short label) {
+std::vector<bool> Sequential::oneHotEncode(double label) {
 	std::vector<bool> ohe(10, 0);
-	for (unsigned short i = 0; i < 10; i++) {
+	for (double i = 0; i < 10; i++) {
 		if (i == label) ohe[i] = 1;
 	}
 	return ohe;
@@ -41,9 +41,9 @@ void Sequential::backprop(const std::vector<double>& trainingInput, const std::v
 	//layers[layers.size() - 1].computeGradients(predictions);
 	for (int i = layers.size() - 1; i >= 0; i--) {
 		if (i) {
-			layers[i].computeGradients(layers[i - 1].getActivatedOutput());
+			layers[i].computeGradients(layers[(size_t)i - 1].getActivatedOutput());
 			std::vector<double> error = layers[i].computePreviousError();
-			layers[i - 1].setError(error);
+			layers[(size_t)i - 1].setError(error);
 		}
 		else {
 			layers[i].computeGradients(trainingInput);
@@ -67,7 +67,7 @@ void Sequential::gradientDescent(const std::vector<std::vector<double>>& trainin
 	}
 }
 
-void Sequential::train(const std::vector<std::vector<double>>& trainingData, const std::vector<unsigned short>& answers, unsigned epochs, double learningRate) {
+void Sequential::train(const std::vector<std::vector<double>>& trainingData, const std::vector<double>& answers, unsigned epochs, double learningRate) {
 	std::vector<std::vector<bool>> labels;
 	for (size_t i = 0; i < answers.size(); i++) {
 		labels[i] = oneHotEncode(answers[i]);

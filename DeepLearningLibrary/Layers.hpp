@@ -35,7 +35,7 @@ public:
 	std::vector<double> getActivatedOutput();
 	void setError(const std::vector<double>&);
 	void computeGradients(const std::vector<double>&);
-	void updateParameters(unsigned, double);
+	void updateParameters(size_t, double);
 	std::vector<double> computePreviousError();
 };
 

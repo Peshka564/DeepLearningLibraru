@@ -57,7 +57,7 @@ void Dense::computeGradients(const std::vector<double>& prevOutput) {
 	}
 }
 
-void Dense::updateParameters(unsigned numSamples, double learningRate) {
+void Dense::updateParameters(size_t numSamples, double learningRate) {
 	// w = w - eta * gradient
 	// average over all of them
 	for (size_t i = 0; i < weights.size(); i++) {
