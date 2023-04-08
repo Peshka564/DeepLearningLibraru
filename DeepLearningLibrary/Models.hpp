@@ -17,6 +17,7 @@ private:
 	void backprop(const std::vector<double>&, const std::vector<bool>&);
 	void gradientDescent(const std::vector<std::vector<double>>&, const std::vector<std::vector<bool>>&, double);
 	double calculateCost(const std::vector<std::vector<double>>&, const std::vector<std::vector<bool>>&);
+	std::vector<std::vector<double>> miniBatchSplit(const std::vector<double>&, size_t);
 public:
 	Sequential(std::initializer_list<Dense> list);
 	// ushort for 0-255 for pixels and 0-9 for labels

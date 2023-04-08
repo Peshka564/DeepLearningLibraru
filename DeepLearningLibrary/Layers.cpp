@@ -15,7 +15,7 @@ void Dense::initializeParams(size_t nodes) {
 	std::cout << nodes << ", " << nodesOut << std::endl;
 	nodesIn = nodes;
 	
-	// generate random gaussian distributed numbers
+	// generate random numbers from normal distribution
 	std::random_device rd;
 	std::mt19937 e2(rd());
 	e2.seed(1);
@@ -60,6 +60,13 @@ std::vector<double> Dense::computePreviousError() {
 }
 
 void Dense::computeGradients(const std::vector<double>& prevOutput) {
+	// z = a(l-1) * w + b
+	// biases
+	// dC / db = dC / dz * dz / db
+	// dz / db = 1 => dC / db = dC / dz
+	// weights
+	// dC / dw = dC / dz * dz / dw
+	// dz / dw = a(l-1) => dC / dw = dC / dz * a(l - 1)
 	gradientBiases = gradientOutput;
 	for (size_t i = 0; i < weights.size(); i++) {
 		for (size_t j = 0; j < weights[0].size(); j++) {
@@ -79,6 +86,7 @@ void Dense::updateParameters(size_t numSamples, double learningRate) {
 	for (size_t i = 0; i < biases.size(); i++) {
 		biases[i] -= learningRate * gradientBiases[i] / numSamples;
 	}
+	// zero grad
 	gradientWeights = std::vector<std::vector<double>>(nodesOut, std::vector<double>(nodesIn, 0));
 	gradientBiases = std::vector<double>(nodesOut, 0);
 }
@@ -92,6 +100,7 @@ std::vector<double> Dense::getActivatedOutput() {
 }
 
 void Dense::setError(const std::vector<double>& error) {
+	// dC/dz = dC/da * da/dz = dC/da * sigmoid'(z)
 	std::vector<double> activatedOutput(output.size());
 	for (size_t i = 0; i < output.size(); i++) {
 		activatedOutput[i] = activation::sigmoidPrime(output[i]);

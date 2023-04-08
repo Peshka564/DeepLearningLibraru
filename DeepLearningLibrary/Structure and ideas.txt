@@ -1,8 +1,7 @@
-Keras.io	
 Sequential model(Dense, Flatten, Regularization?)
 Layer specs: activation(linear by default), units, input_shape
 Other specs: cost function, optimizer(sgd, adam, ...), metrics(loss, accuracy, ...)
-Hyperparams: learning rate, momentum?, epochs, batchsize
+Hyperparams: learning rate(adam), momentum?, epochs, batchsize
 Additional features: Save model
 
 Key stuff:

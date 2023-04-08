@@ -21,14 +21,11 @@ private:
 	std::vector<double> output;
 	std::vector<std::vector<double>> gradientWeights;
 	std::vector<double> gradientBiases;
-	// partial derivative of cost with respect to weighted output(zk)
+	// partial derivative of cost with respect to weighted output(z)
 	std::vector<double> gradientOutput;
 public:
 	Dense() = default;
 	Dense(size_t nodes);
-	//Dense& operator=(const Dense&);
-	// not needed for vectors who have smart pointers
-	//~Dense();
 	size_t getNodesOut() const ;
 	void initializeParams(size_t);
 	std::vector<double> calculateOutput(std::vector<double>&);
