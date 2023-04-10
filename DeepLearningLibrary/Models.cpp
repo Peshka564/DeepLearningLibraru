@@ -1,6 +1,8 @@
 #include <initializer_list>
 #include <cstring>
 #include <random>
+#include <algorithm>
+#include <iterator>
 #include "Models.hpp"
 #include "Layers.hpp"
 #include "Utils.hpp"
@@ -20,7 +22,6 @@ std::vector<double> Sequential::feedForward(std::vector<double> trainingInput) {
 double Sequential::calculateCost(const std::vector<std::vector<double>>& trainingData, const std::vector<std::vector<bool>>& labels) {
 	double res = 0;
 	for (size_t i = 0; i < trainingData.size(); i++) {
-		//!!
 		std::vector<double> goodLabels(labels[i].begin(), labels[i].end());
 		res += cost::MSE(feedForward(trainingData[i]), goodLabels);
 	}
@@ -34,6 +35,30 @@ std::vector<bool> Sequential::oneHotEncode(double label) {
 		if (i == label) ohe[i] = 1;
 	}
 	return ohe;
+}
+
+std::vector<std::vector<std::vector<double>>> Sequential::miniBatchSplit(const std::vector<std::vector<double>>& trainingData, unsigned miniBatchSize) {
+	// init rng
+	std::random_device rd;
+	std::mt19937 g(rd());
+	g.seed(5);
+
+	// shuffle data
+	std::vector<std::vector<double>> shuffledData = trainingData;
+	std::shuffle(shuffledData.begin(), shuffledData.end(), g);
+
+	// split into batches
+	std::vector<std::vector<std::vector<double>>> batches;
+	std::vector<std::vector<double>> temp;
+	size_t k = 0;
+	while (k < shuffledData.size()) {
+		for (size_t i = k; i < k + miniBatchSize && i < shuffledData.size(); i++) {
+			temp.push_back(shuffledData[i]);
+		}
+		batches.push_back(temp);
+		k += miniBatchSize;
+	}
+	return batches;
 }
 
 void Sequential::backprop(const std::vector<double>& trainingInput, const std::vector<bool>& labels) {
@@ -56,38 +81,24 @@ void Sequential::backprop(const std::vector<double>& trainingInput, const std::v
 	}
 }
 
-//std::vector<std::vector<std::vector<double>>> Sequential::miniBatchSplit(const std::vector<std::vector<double>>& trainingData, size_t miniBatchSize) {
-//	// generate random index to sample from training data
-//	std::random_device rd;
-//	std::mt19937 e2(rd());
-//	//e2.seed(5);
-//	std::uniform_int_distribution<int> dist(0, trainingData.size() - 1);
-//	std::vector<std::vector<double>> batches;
-//	
-//	
-//
-//	std::vector<bool> seen(trainingData.size());
-//	size_t i = 0;
-//	while (i < miniBatchSize) {
-//
-//	}
-//}
-
-void Sequential::gradientDescent(const std::vector<std::vector<double>>& trainingData, const std::vector<std::vector<bool>>& labels, double learningRate) {
+void Sequential::gradientDescent(const std::vector<std::vector<double>>& trainingData, const std::vector<std::vector<bool>>& labels, double learningRate, unsigned batchSize) {
 	// split into batches
-	// calculate gradients for a single example
-	for (size_t i = 0; i < trainingData.size(); i++) {
-		// backprop and find gradients
-		backprop(trainingData[i], labels[i]);
-		for (Dense& d : layers) {
-			// instead of trainingData.size() use miniBatchData.size()
-			// adjust weights and biases
-			d.updateParameters(trainingData.size(), learningRate);
+	std::vector<std::vector<std::vector<double>>> batches = miniBatchSplit(trainingData, batchSize);
+	for (auto batch : batches) {
+		// calculate gradients for a single example
+		for (size_t i = 0; i < batch.size(); i++) {
+			// backprop and find gradients
+			backprop(batch[i], labels[i]);
+			for (Dense& d : layers) {
+				// adjust weights and biases
+				d.updateParameters(batch.size(), learningRate);
+			}
 		}
 	}
 }
 
-void Sequential::train(const std::vector<std::vector<double>>& trainingData, const std::vector<double>& answers, unsigned epochs, double learningRate) {
+void Sequential::train(const std::vector<std::vector<double>>& trainingData, const std::vector<double>& answers, unsigned epochs, double learningRate, unsigned batchSize) {
+	// generate labels - maybe specified by user
 	std::vector<std::vector<bool>> labels(answers.size(), std::vector<bool>(10));
 	for (size_t i = 0; i < answers.size(); i++) {
 		labels[i] = oneHotEncode(answers[i]);
@@ -103,9 +114,28 @@ void Sequential::train(const std::vector<std::vector<double>>& trainingData, con
 	std::cout << "Passed init" << std::endl;
 
 	for (unsigned epoch = 1; epoch <= epochs; epoch++) {
+		std::cout << "-----------------------------------------------" << std::endl;
 		std::cout << "Epoch: " << epoch << std::endl;
-		gradientDescent(trainingData, labels, learningRate);
+		// train the network
+		gradientDescent(trainingData, labels, learningRate, batchSize);
+		// evaluate cost
 		std::cout << "Cost: " << calculateCost(trainingData, labels) << std::endl;
+		// evaluate accuracy
+		int accuracy = 0;
+		for (size_t i = 0; i < trainingData.size(); i++) {
+			std::vector<double> predictions = feedForward(trainingData[i]);
+			double maxVal = predictions[0];
+			int maxIndex = 0;
+			for (size_t j = 0; j < predictions.size(); j++) {
+				if (predictions[j] > maxVal) {
+					maxVal = predictions[j];
+					maxIndex = j;
+				}
+			}
+			if (labels[i][maxIndex] == 1) accuracy++;
+		}
+		std::cout << "Accuracy: " << accuracy * 100.0 / trainingData.size() << std::endl;
+		std::cout << "-----------------------------------------------" << std::endl;
 		// add comparison with numerical gradient
 	}
 }

@@ -7,7 +7,6 @@
 
 class Sequential {
 private:
-	//unsigned miniBatchSize;
 	std::vector<Dense> layers;
 
 	// ff for a single training input
@@ -15,13 +14,13 @@ private:
 	// maybe specified by user
 	std::vector<bool> oneHotEncode(double);
 	void backprop(const std::vector<double>&, const std::vector<bool>&);
-	void gradientDescent(const std::vector<std::vector<double>>&, const std::vector<std::vector<bool>>&, double);
+	void gradientDescent(const std::vector<std::vector<double>>&, const std::vector<std::vector<bool>>&, double, unsigned);
 	double calculateCost(const std::vector<std::vector<double>>&, const std::vector<std::vector<bool>>&);
-	std::vector<std::vector<double>> miniBatchSplit(const std::vector<double>&, size_t);
+	std::vector<std::vector<std::vector<double>>> miniBatchSplit(const std::vector<std::vector<double>>&, unsigned);
 public:
 	Sequential(std::initializer_list<Dense> list);
 	// ushort for 0-255 for pixels and 0-9 for labels
-	void train(const std::vector<std::vector<double>>&, const std::vector<double>&, unsigned, double);
+	void train(const std::vector<std::vector<double>>&, const std::vector<double>&, unsigned, double, unsigned);
 	// compile, fit, predict, export
 };
 
