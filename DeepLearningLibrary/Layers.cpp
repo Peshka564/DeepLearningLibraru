@@ -18,7 +18,7 @@ void Dense::initializeParams(size_t nodes) {
 	// generate random numbers from normal distribution
 	std::random_device rd;
 	std::mt19937 e2(rd());
-	e2.seed(1);
+	e2.seed(8923892);
 	std::normal_distribution<> dist(0, 1);
 
 	weights = std::vector<std::vector<double>>(nodesOut, std::vector<double>(nodes));

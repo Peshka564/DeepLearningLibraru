@@ -12,7 +12,7 @@ private:
 	// ff for a single training input
 	std::vector<double> feedForward(std::vector<double>);
 	// maybe specified by user
-	std::vector<bool> oneHotEncode(double);
+	std::vector<bool> oneHotEncode(int);
 	void backprop(const std::vector<double>&, const std::vector<bool>&);
 	void gradientDescent(const std::vector<std::vector<double>>&, const std::vector<std::vector<bool>>&, double, unsigned);
 	double calculateCost(const std::vector<std::vector<double>>&, const std::vector<std::vector<bool>>&);
@@ -20,7 +20,7 @@ private:
 public:
 	Sequential(std::initializer_list<Dense> list);
 	// ushort for 0-255 for pixels and 0-9 for labels
-	void train(const std::vector<std::vector<double>>&, const std::vector<double>&, unsigned, double, unsigned);
+	void train(const std::vector<std::vector<double>>&, const std::vector<int>&, unsigned, double, unsigned);
 	// compile, fit, predict, export
 };
 

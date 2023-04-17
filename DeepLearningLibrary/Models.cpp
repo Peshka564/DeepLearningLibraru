@@ -29,9 +29,9 @@ double Sequential::calculateCost(const std::vector<std::vector<double>>& trainin
 }
 
 // 10 outputs representing each digit guess - {0, 1}
-std::vector<bool> Sequential::oneHotEncode(double label) {
+std::vector<bool> Sequential::oneHotEncode(int label) {
 	std::vector<bool> ohe(10, 0);
-	for (double i = 0; i < 10; i++) {
+	for (int i = 0; i < 10; i++) {
 		if (i == label) ohe[i] = 1;
 	}
 	return ohe;
@@ -41,7 +41,7 @@ std::vector<std::vector<std::vector<double>>> Sequential::miniBatchSplit(const s
 	// init rng
 	std::random_device rd;
 	std::mt19937 g(rd());
-	g.seed(5);
+	g.seed(18291);
 
 	// shuffle data
 	std::vector<std::vector<double>> shuffledData = trainingData;
@@ -83,27 +83,34 @@ void Sequential::backprop(const std::vector<double>& trainingInput, const std::v
 
 void Sequential::gradientDescent(const std::vector<std::vector<double>>& trainingData, const std::vector<std::vector<bool>>& labels, double learningRate, unsigned batchSize) {
 	// split into batches
-	std::vector<std::vector<std::vector<double>>> batches = miniBatchSplit(trainingData, batchSize);
-	for (auto batch : batches) {
-		// calculate gradients for a single example
-		for (size_t i = 0; i < batch.size(); i++) {
-			// backprop and find gradients
-			backprop(batch[i], labels[i]);
-			for (Dense& d : layers) {
-				// adjust weights and biases
-				d.updateParameters(batch.size(), learningRate);
-			}
+	//std::vector<std::vector<std::vector<double>>> batches = miniBatchSplit(trainingData, batchSize);
+	//for (auto batch : batches) {
+	//	// calculate gradients for a single example
+	//	for (size_t i = 0; i < batch.size(); i++) {
+	//		// backprop and find gradients
+	//		backprop(batch[i], labels[i]);
+	//		for (Dense& d : layers) {
+	//			// adjust weights and biases
+	//			d.updateParameters(batch.size(), learningRate);
+	//		}
+	//	}
+	//}
+	for (size_t i = 0; i < trainingData.size(); i++) {
+		// backprop and find gradients
+		backprop(trainingData[i], labels[i]);
+		for (Dense& d : layers) {
+			// adjust weights and biases
+			d.updateParameters(trainingData.size(), learningRate);
 		}
 	}
 }
 
-void Sequential::train(const std::vector<std::vector<double>>& trainingData, const std::vector<double>& answers, unsigned epochs, double learningRate, unsigned batchSize) {
+void Sequential::train(const std::vector<std::vector<double>>& trainingData, const std::vector<int>& answers, unsigned epochs, double learningRate, unsigned batchSize) {
 	// generate labels - maybe specified by user
 	std::vector<std::vector<bool>> labels(answers.size(), std::vector<bool>(10));
 	for (size_t i = 0; i < answers.size(); i++) {
 		labels[i] = oneHotEncode(answers[i]);
 	}
-
 	std::cout << "Passed labeling" << std::endl;
 
 	// >check for empty training data
@@ -134,7 +141,7 @@ void Sequential::train(const std::vector<std::vector<double>>& trainingData, con
 			}
 			if (labels[i][maxIndex] == 1) accuracy++;
 		}
-		std::cout << "Accuracy: " << accuracy * 100.0 / trainingData.size() << std::endl;
+		std::cout << "Accuracy: " << accuracy/* * 100.0 / trainingData.size()*/ << std::endl;
 		std::cout << "-----------------------------------------------" << std::endl;
 		// add comparison with numerical gradient
 	}

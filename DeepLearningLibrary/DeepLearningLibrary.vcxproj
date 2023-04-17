@@ -145,6 +145,8 @@
     <ClCompile Include="Layers.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Models.cpp" />
+    <ClCompile Include="scalarEngine\engine.cpp" />
+    <ClCompile Include="scalarEngine\engineTest.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="utils\vector.cpp" />
     <ClCompile Include="vectorTest.cpp" />
@@ -154,6 +156,7 @@
     <ClInclude Include="Cost.hpp" />
     <ClInclude Include="Layers.hpp" />
     <ClInclude Include="Models.hpp" />
+    <ClInclude Include="scalarEngine\engine.hpp" />
     <ClInclude Include="Utils.hpp" />
     <ClInclude Include="utils\vector.hpp" />
   </ItemGroup>
