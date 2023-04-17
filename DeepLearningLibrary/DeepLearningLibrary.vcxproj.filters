@@ -15,57 +15,57 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="utils\vector.cpp">
+    <ClCompile Include="Misc\utils\vector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Activation.cpp">
+    <ClCompile Include="CanonicalNN\Activation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cost.cpp">
+    <ClCompile Include="CanonicalNN\Cost.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Layers.cpp">
+    <ClCompile Include="CanonicalNN\Layers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="CanonicalNN\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Models.cpp">
+    <ClCompile Include="CanonicalNN\Models.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Utils.cpp">
+    <ClCompile Include="CanonicalNN\Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vectorTest.cpp">
+    <ClCompile Include="Misc\vectorTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scalarEngine\engine.cpp">
+    <ClCompile Include="EngineBasedNN\scalarEngine\engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scalarEngine\engineTest.cpp">
+    <ClCompile Include="EngineBasedNN\scalarEngine\engineTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="utils\vector.hpp">
+    <ClInclude Include="Misc\utils\vector.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Activation.hpp">
+    <ClInclude Include="CanonicalNN\Activation.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cost.hpp">
+    <ClInclude Include="CanonicalNN\Cost.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Layers.hpp">
+    <ClInclude Include="CanonicalNN\Layers.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Models.hpp">
+    <ClInclude Include="CanonicalNN\Models.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Utils.hpp">
+    <ClInclude Include="CanonicalNN\Utils.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scalarEngine\engine.hpp">
+    <ClInclude Include="EngineBasedNN\scalarEngine\engine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -76,9 +76,9 @@
     <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="mnist_testing.txt" />
-    <Text Include="mnist_training.txt" />
-    <Text Include="mnist_validation.txt" />
-    <Text Include="Structure and ideas.txt" />
+    <Text Include="CanonicalNN\mnist_testing.txt" />
+    <Text Include="CanonicalNN\mnist_training.txt" />
+    <Text Include="CanonicalNN\mnist_validation.txt" />
+    <Text Include="CanonicalNN\Structure and ideas.txt" />
   </ItemGroup>
 </Project>

@@ -8,6 +8,7 @@ int main() {
 	p.grad = 3;
 	std::cout << "Starts here:" << std::endl;
 	p.backward();
+	p.backward();
 	std::cout << p.data << " " << p.grad << std::endl;
 	std::cout << v.grad << " " << g.grad << std::endl;
 }

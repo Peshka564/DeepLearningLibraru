@@ -7,11 +7,16 @@
 class Value {
 public:
 	double data, grad;
+	//bool called;
 	//std::vector<Value> chidren;
-	std::function<void()> backward;
+	std::function<void(double)> adjustGradients;
+
+	void backward();
 public:
 	Value(double d);
-	Value operator+(Value& other);
+	// add zero_grad and called = false
+
+	friend Value operator+(Value& one, Value& other);
 };
 
 #endif
