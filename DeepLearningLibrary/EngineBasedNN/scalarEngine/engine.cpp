@@ -4,7 +4,7 @@
 Value::Value(double d) {
 	data = d;
 	grad = 0;
-	//called = false;
+	called = false;
 }
 
 Value operator+(Value& one, Value& other) {
@@ -12,13 +12,13 @@ Value operator+(Value& one, Value& other) {
 	out.adjustGradients = [&](double grad) {
 		one.grad += grad;
 		other.grad += grad;
-		// ?? recursion
-		/*one.backward();
-		other.backward();*/
+		if (!one.called && one.adjustGradients) one.backward();
+		if (!other.called && other.adjustGradients) other.backward();
 	};
 	return out;
 }
 
 void Value::backward() {
 	adjustGradients(this->grad);
+	called = true;
 }

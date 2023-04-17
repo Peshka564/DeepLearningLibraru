@@ -146,7 +146,7 @@
     <ClCompile Include="CanonicalNN\main.cpp" />
     <ClCompile Include="CanonicalNN\Models.cpp" />
     <ClCompile Include="EngineBasedNN\scalarEngine\engine.cpp" />
-    <ClCompile Include="EngineBasedNN\scalarEngine\engineTest.cpp" />
+    <ClCompile Include="EngineBasedNN\engineTest.cpp" />
     <ClCompile Include="CanonicalNN\Utils.cpp" />
     <ClCompile Include="Misc\utils\vector.cpp" />
     <ClCompile Include="Misc\vectorTest.cpp" />

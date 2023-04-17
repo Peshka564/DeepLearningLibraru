@@ -7,7 +7,7 @@
 class Value {
 public:
 	double data, grad;
-	//bool called;
+	bool called;
 	//std::vector<Value> chidren;
 	std::function<void(double)> adjustGradients;
 

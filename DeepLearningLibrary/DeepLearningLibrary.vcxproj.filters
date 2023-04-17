@@ -42,7 +42,7 @@
     <ClCompile Include="EngineBasedNN\scalarEngine\engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EngineBasedNN\scalarEngine\engineTest.cpp">
+    <ClCompile Include="EngineBasedNN\engineTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
