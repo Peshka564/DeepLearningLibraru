@@ -1,15 +1,17 @@
 #include <iostream>
+#include <vector>
 #include "./scalarEngine/engine.hpp"
 
 // topoSort
+void topoSort(const Value& root) {
+	std::vector<Value&> sorted;
+}
 
 int main() {
 	Value v(5);
 	Value g(10);
 	Value p = v + g;
-	p.grad = 3;
 	Value d = v + g;
-	d.grad = 7;
 	Value q = p + d;
 	q.grad = 1;
 	q.backward();
