@@ -19,9 +19,8 @@ private:
 	std::vector<std::vector<std::vector<double>>> miniBatchSplit(const std::vector<std::vector<double>>&, unsigned);
 public:
 	Sequential(std::initializer_list<Dense> list);
-	// ushort for 0-255 for pixels and 0-9 for labels
 	void train(const std::vector<std::vector<double>>&, const std::vector<int>&, unsigned, double, unsigned);
-	// compile, fit, predict, export
+	// compile, fit, predict, save
 };
 
 #endif // !MODELS_HPP
