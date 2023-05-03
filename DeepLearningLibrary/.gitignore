@@ -6,6 +6,7 @@
 # Custom
 mnist*.txt
 /Misc/
+Structure_and_ideas.txt
 
 # User-specific files
 *.rsuser
