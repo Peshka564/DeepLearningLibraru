@@ -5,7 +5,7 @@
 
 # Custom
 mnist*.txt
-./DeepLearningLibrary/Misc
+/Misc/
 
 # User-specific files
 *.rsuser
