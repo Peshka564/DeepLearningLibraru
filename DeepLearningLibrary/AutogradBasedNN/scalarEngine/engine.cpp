@@ -49,8 +49,6 @@ Value sigmoid(Value& one) {
 }
 
 void Value::backward() const {
-	// it's not working, need to toposort
-	// test with bigger network to make sure
 	std::cout << "Called backwards on value: " << data << std::endl;
 	adjustGradients(this->grad, this->data);
 }
@@ -86,13 +84,7 @@ void Value::backprop() {
 	// we need to reverse the topoSorted array
 	std::vector<const Value*> topo;
 	for (int i = proxy.size() - 1; i >= 0; i--) topo.push_back(proxy[i]);
-	
-	// debug
-	for (size_t i = 0; i < topo.size(); i++) {
-		std::cout << topo[i]->data << " ";
-	}
-	std::cout << std::endl;
-	
+
 	this->grad = 1;
 
 	// now we can update the gradients of the values
