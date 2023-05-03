@@ -5,7 +5,7 @@
 
 # Custom
 mnist*.txt
-Misc/
+/Misc/
 
 # User-specific files
 *.rsuser
