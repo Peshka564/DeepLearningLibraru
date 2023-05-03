@@ -39,10 +39,10 @@
     <ClCompile Include="Misc\vectorTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EngineBasedNN\scalarEngine\engine.cpp">
+    <ClCompile Include="AutogradBasedNN\scalarEngine\engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EngineBasedNN\engineTest.cpp">
+    <ClCompile Include="AutogradBasedNN\scalarEngine\engineTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,7 +65,7 @@
     <ClInclude Include="CanonicalNN\Utils.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EngineBasedNN\scalarEngine\engine.hpp">
+    <ClInclude Include="AutogradBasedNN\scalarEngine\engine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

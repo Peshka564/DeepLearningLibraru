@@ -1,6 +1,6 @@
 # DeepLearningLibrary
-A custom made deep learning library in c++
+A c++ implementation of the neural network architecture in two different ways:
 
-CanonicalNN - neural network implementation following Michael Nielsen's book
+CanonicalNN - a neural network implementation following Michael Nielsen's book
 
-EngineBasedNN - neural network implementation(soon to be) following Andrej Karpathy's micrograd
+AutogradBasedNN - a neural network implementation(currently only an autograd engine) following Andrej Karpathy's micrograd
