@@ -11,15 +11,13 @@ int main() {
 	std::vector<std::vector<Value>> xs = { {2, 3, -1}, {3, -1, 0.5}, {0.5, 1, 1}, {1, 1, -1} };
 	std::vector<Value> predictions;
 	std::vector<Value> ys = { 1, -1, -1, 1 };
-	/*for (size_t i = 0; i < xs.size(); i++) {
+	for (size_t i = 0; i < xs.size(); i++) {
 		for (auto& val : model.feedForward(xs[i])) {
 			std::cout << val << std::endl;
 			predictions.push_back(val);
 		}
-	}*/
-	std::vector<Value> p = model.feedForward(xs[0]);
-	p[0].backprop();
-	/*Value temp0 = ys[0] - predictions[0];
+	}
+	Value temp0 = ys[0] - predictions[0];
 	Value temp1 = ys[1] - predictions[1];
 	Value temp2 = ys[2] - predictions[2];
 	Value temp3 = ys[3] - predictions[3];
@@ -33,10 +31,9 @@ int main() {
 	Value final2 = proxy2 + proxy3;
 
 	Value loss = final1 + final2;
+	loss.backprop();
 	std::cout << "---------------" << std::endl;
 	std::cout << loss << std::endl;
-	std::cout << final2 << std::endl;
-	loss.backprop();*/
 
 	//Successful
 	//Neuron sample(3);

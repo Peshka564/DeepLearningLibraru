@@ -9,3 +9,12 @@ std::vector<Value> Layer::feedForward(std::vector<Value>& input) {
 	for (size_t i = 0; i < nodes.size(); i++) output[i] = nodes[i].activate(input);
 	return output;
 }
+
+std::vector<Value> Layer::parameters() {
+	std::vector<Value> params;
+	for (size_t i = 0; i < nodes.size(); i++) {
+		std::vector<Value> temp = nodes[i].parameters();
+		params.insert(params.end(), temp.begin(), temp.end());
+	}
+	return params;
+}

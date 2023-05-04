@@ -16,6 +16,7 @@ public:
 public:
 	Neuron(size_t);
 	Value activate(std::vector<Value>&);
+	std::vector<Value> parameters();
 };
 
 #endif // NEURON

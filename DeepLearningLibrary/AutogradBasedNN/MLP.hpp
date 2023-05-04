@@ -11,6 +11,7 @@ class MultiLayerPerceptron {
 public:
 	MultiLayerPerceptron(size_t, const std::vector<size_t>&);
 	std::vector<Value> feedForward(std::vector<Value>);
+	std::vector<Value> parameters();
 };
 
 #endif // !MLP

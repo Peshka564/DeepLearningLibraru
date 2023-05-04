@@ -17,3 +17,12 @@ std::vector<Value> MultiLayerPerceptron::feedForward(std::vector<Value> input) {
 	}
 	return intermediate[intermediate.size() - 1];
 }
+
+std::vector<Value> MultiLayerPerceptron::parameters() {
+	std::vector<Value> params;
+	for (size_t i = 0; i < layers.size(); i++) {
+		std::vector<Value> temp = layers[i].parameters();
+		params.insert(params.end(), temp.begin(), temp.end());
+	}
+	return params;
+}

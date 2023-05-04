@@ -19,3 +19,9 @@ Value Neuron::activate(std::vector<Value>& x) {
 	activatedOutput = sigmoid(weightedOutputs[weightedOutputs.size() - 1]);
 	return activatedOutput;
 }
+
+std::vector<Value> Neuron::parameters() {
+	std::vector<Value> params = weights;
+	params.push_back(bias);
+	return params;
+}
