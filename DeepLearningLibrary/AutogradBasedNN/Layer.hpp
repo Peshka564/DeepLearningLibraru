@@ -6,6 +6,7 @@
 class Layer {
 	std::vector<Neuron> nodes;
 public:
+	Layer() = default;
 	Layer(size_t, size_t);
 	std::vector<Value> feedForward(std::vector<Value>&);
 };

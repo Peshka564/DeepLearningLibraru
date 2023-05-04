@@ -16,6 +16,7 @@ private:
 	void buildTopo(std::vector<const Value*>& visited, std::vector<const Value*>& topo) const;
 	void backward() const;
 public:
+	Value();
 	Value(double d);
 	void backprop();
 

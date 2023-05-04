@@ -7,7 +7,7 @@
 class Neuron {
 public:
 	// All of these are necessary to keep l-values in memory
-	// so that backprop is successful
+	// so that the chain doesn't break and backprop is successful
 	std::vector<Value> weights;
 	std::vector<Value> inputs;
 	std::vector<Value> weightedOutputs;
