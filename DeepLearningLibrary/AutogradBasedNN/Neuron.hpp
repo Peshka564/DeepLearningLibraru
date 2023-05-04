@@ -5,10 +5,12 @@
 #include "scalarEngine/engine.hpp"
 
 class Neuron {
-private:
+public:
+	// All of these are necessary to keep l-values in memory
+	// so that backprop is successful
 	std::vector<Value> weights;
 	std::vector<Value> inputs;
-	Value weightedOutput;
+	std::vector<Value> weightedOutputs;
 	Value activatedOutput;
 	Value bias;
 public:

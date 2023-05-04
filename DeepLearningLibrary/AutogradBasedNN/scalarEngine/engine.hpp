@@ -7,7 +7,7 @@
 
 class Value {
 //change back to private
-private:
+public:
 	double data, grad;
 	std::vector<Value*> children;
 	std::function<void(double, double)> adjustGradients;

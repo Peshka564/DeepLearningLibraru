@@ -82,6 +82,7 @@ void Value::buildTopo(std::vector<const Value*>& visited, std::vector<const Valu
 		}
 		topo.push_back(this);
 	}
+	std::cout << "here" << std::endl;
 }
 
 // currently the algorithm assumes we have only 1 source
@@ -102,7 +103,9 @@ void Value::backprop() {
 	this->grad = 1;
 
 	// now we can update the gradients of the values
-	for (size_t i = 0; i < topo.size(); i++) topo[i]->backward();
+	for (size_t i = 0; i < topo.size(); i++) {
+		if(topo[i]->children.size()) topo[i]->backward();
+	}
 }
 
 std::ostream& operator<<(std::ostream& os, const Value& v) {

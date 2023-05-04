@@ -3,11 +3,7 @@
 #include "./scalarEngine/engine.hpp"
 #include "Layer.hpp"
 #include "MLP.hpp"
-
-Value f(Value& a, Value& b) {
-	Value c = a - b;
-	return c;
-}
+#include "Neuron.hpp"
 
 int main() {
 
@@ -42,8 +38,19 @@ int main() {
 	std::cout << final2 << std::endl;
 	loss.backprop();*/
 
-	Value a(5), b(10);
-	Value d = f(a, b);
-	d.backprop();
-	std::cout << a << std::endl << b << std::endl;
+	Neuron sample(3);
+	std::vector<Value> x = { 1, 2, 0.5 };
+	Value output = sample.activate(x);
+	std::cout << "--------------" << std::endl;
+	//std::cout << output << std::endl;
+	////std::cout << sample.activatedOutput << std::endl;
+
+	for (size_t i = 0; i < sample.weightedOutputs[1].children.size(); i++) {
+		std::cout << *(sample.weightedOutputs[1].children[i]) << std::endl;
+	}
+	std::cout << sample.weightedOutputs[0] << std::endl;
+	std::cout << sample.weightedOutputs[1] << std::endl;
+	std::cout << sample.weightedOutputs[2] << std::endl;
+	// trying to get backprop to work
+	output.backprop();
 }
