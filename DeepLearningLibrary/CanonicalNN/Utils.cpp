@@ -1,8 +1,11 @@
 #include <vector>
+#include <stdexcept>
 #include <cmath>
+#include <random>
 #include "Utils.hpp"
 
 double utils::dotProduct(const std::vector<double>& a, const std::vector<double>& b) {
+	if (a.size() != b.size()) throw std::invalid_argument("Not of equal size");
 	double res = 0;
 	for (size_t i = 0; i < a.size(); i++) {
 		res += a[i] * b[i];
@@ -19,6 +22,7 @@ double utils::normal(const std::vector<double>& v) {
 }
 
 std::vector<double> utils::multiply(const std::vector<double>& a, const std::vector<double>& b) {
+	if (a.size() != b.size()) throw std::invalid_argument("Not of equal size");
 	std::vector<double> v(a.size());
 	for (size_t i = 0; i < a.size(); i++) {
 		v[i] = a[i] * b[i];
@@ -27,6 +31,7 @@ std::vector<double> utils::multiply(const std::vector<double>& a, const std::vec
 }
 
 std::vector<double> utils::add(const std::vector<double>& a, const std::vector<double>& b) {
+	if (a.size() != b.size()) throw std::invalid_argument("Not of equal size");
 	std::vector<double> v(a.size());
 	for (size_t i = 0; i < a.size(); i++) {
 		v[i] = a[i] + b[i];
@@ -35,6 +40,7 @@ std::vector<double> utils::add(const std::vector<double>& a, const std::vector<d
 }
 
 std::vector<double> utils::subtract(const std::vector<double>& a, const std::vector<double>& b) {
+	if (a.size() != b.size()) throw std::invalid_argument("Not of equal size");
 	std::vector<double> v(a.size());
 	for (size_t i = 0; i < a.size(); i++) {
 		v[i] = a[i] - b[i];
@@ -43,24 +49,24 @@ std::vector<double> utils::subtract(const std::vector<double>& a, const std::vec
 }
 
 std::vector<std::vector<double>> utils::matmul(const std::vector<std::vector<double>>& a, const std::vector<std::vector<double>>& b) {
-	// maybe throw error
-	// check if a or b is empty
-	if (!a.empty() && !b.empty()) {
-		std::vector<std::vector<double>> c(a.size(), std::vector<double>(b.size(), 0));
-		for (size_t i = 0; i < a.size(); i++) {
-			for (size_t j = 0; j < b.size(); j++) {
-				for (size_t k = 0; k < a[0].size(); k++) {
-					c[i][j] += a[i][k] + b[k][j];
-				}
+	if (a.empty() || b.empty()) throw std::invalid_argument("Empty input"); // or return {}
+	if (a[0].size() != b.size()) throw std::invalid_argument("Invalid shape");
+	
+	std::vector<std::vector<double>> c(a.size(), std::vector<double>(b.size(), 0));
+	for (size_t i = 0; i < a.size(); i++) {
+		for (size_t j = 0; j < b.size(); j++) {
+			for (size_t k = 0; k < a[0].size(); k++) {
+				c[i][j] += a[i][k] + b[k][j];
 			}
 		}
-		return c;
 	}
-	return {};
+	return c;
 }
 
 std::vector<double> utils::matmul(const std::vector<std::vector<double>>& a, const std::vector<double>& b) {
-	// maybe throw error
+	if (a.empty() || b.empty()) throw std::invalid_argument("Empty input"); // or return {}
+	if (a[0].size() != b.size()) throw std::invalid_argument("Invalid shape");
+
 	if (!a.empty() && !b.empty()) {
 		std::vector<double> c(a.size(), 0);
 		for (size_t i = 0; i < a.size(); i++) {
@@ -89,4 +95,12 @@ std::vector<std::vector<double>> utils::transpose(const std::vector<std::vector<
 	}
 
 	return mT;
+}
+
+double utils::normalDistr() {
+	std::random_device rd;
+	std::mt19937 e2(rd());
+	//e2.seed(8923892);
+	std::normal_distribution<> dist(0, 1);
+	return dist(e2);
 }

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <functional>
+#include <iostream>
 
 class Value {
 //change back to private
@@ -24,7 +25,9 @@ public:
 	// to add: other activation functions
 	friend Value operator+(Value& one, Value& other);
 	friend Value operator*(Value& one, Value& other);
+	friend Value operator-(Value& one, Value& other);
 	friend Value sigmoid(Value& one);
+	friend std::ostream& operator<<(std::ostream&, const Value&);
 };
 
 #endif

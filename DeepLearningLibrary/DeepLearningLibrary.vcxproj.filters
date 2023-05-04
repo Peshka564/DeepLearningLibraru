@@ -27,7 +27,7 @@
     <ClCompile Include="CanonicalNN\Layers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CanonicalNN\main.cpp">
+    <ClCompile Include="CanonicalNN\nnTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CanonicalNN\Models.cpp">
@@ -42,7 +42,16 @@
     <ClCompile Include="AutogradBasedNN\scalarEngine\engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AutogradBasedNN\scalarEngine\engineTest.cpp">
+    <ClCompile Include="AutogradBasedNN\MLP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AutogradBasedNN\Neuron.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AutogradBasedNN\Layer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AutogradBasedNN\nnTestAutograd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,6 +77,15 @@
     <ClInclude Include="AutogradBasedNN\scalarEngine\engine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AutogradBasedNN\MLP.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AutogradBasedNN\Neuron.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AutogradBasedNN\Layer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE" />
@@ -79,6 +97,6 @@
     <Text Include="CanonicalNN\mnist_testing.txt" />
     <Text Include="CanonicalNN\mnist_training.txt" />
     <Text Include="CanonicalNN\mnist_validation.txt" />
-    <Text Include="CanonicalNN\Structure and ideas.txt" />
+    <Text Include="CanonicalNN\Structure_and_ideas.txt" />
   </ItemGroup>
 </Project>

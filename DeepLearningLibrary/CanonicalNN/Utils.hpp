@@ -24,6 +24,8 @@ namespace utils {
 	double matmul(const std::vector<double>&, const std::vector<double>&);
 	// transpose
 	std::vector<std::vector<double>> transpose(const std::vector<std::vector<double>>&);
+	// generate random numbers from normal distribution
+	double normalDistr();
 }
 
 #endif // !UTILS_HPP

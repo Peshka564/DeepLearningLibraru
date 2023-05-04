@@ -23,6 +23,20 @@ Value operator+(Value& one, Value& other) {
 	return out;
 }
 
+Value operator-(Value& one, Value& other) {
+	Value out(one.data - other.data);
+
+	out.children.push_back(&one);
+	out.children.push_back(&other);
+
+	out.adjustGradients = [&](double grad, double data) {
+		one.grad += grad;
+		other.grad += -grad;
+	};
+
+	return out;
+}
+
 Value operator*(Value& one, Value& other) {
 	Value out(one.data * other.data);
 
@@ -89,4 +103,9 @@ void Value::backprop() {
 
 	// now we can update the gradients of the values
 	for (size_t i = 0; i < topo.size(); i++) topo[i]->backward();
+}
+
+std::ostream& operator<<(std::ostream& os, const Value& v) {
+	os << "Data: " << v.data << " Grad: " << v.grad;
+	return os;
 }

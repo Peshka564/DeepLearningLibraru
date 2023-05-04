@@ -140,18 +140,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AutogradBasedNN\Layer.cpp" />
+    <ClCompile Include="AutogradBasedNN\MLP.cpp" />
+    <ClCompile Include="AutogradBasedNN\Neuron.cpp" />
+    <ClCompile Include="AutogradBasedNN\nnTestAutograd.cpp" />
     <ClCompile Include="CanonicalNN\Activation.cpp" />
     <ClCompile Include="CanonicalNN\Cost.cpp" />
     <ClCompile Include="CanonicalNN\Layers.cpp" />
-    <ClCompile Include="CanonicalNN\main.cpp" />
+    <ClCompile Include="CanonicalNN\nnTest.cpp" />
     <ClCompile Include="CanonicalNN\Models.cpp" />
     <ClCompile Include="AutogradBasedNN\scalarEngine\engine.cpp" />
-    <ClCompile Include="AutogradBasedNN\scalarEngine\engineTest.cpp" />
     <ClCompile Include="CanonicalNN\Utils.cpp" />
     <ClCompile Include="Misc\utils\vector.cpp" />
     <ClCompile Include="Misc\vectorTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AutogradBasedNN\Layer.hpp" />
+    <ClInclude Include="AutogradBasedNN\MLP.hpp" />
+    <ClInclude Include="AutogradBasedNN\Neuron.hpp" />
     <ClInclude Include="CanonicalNN\Activation.hpp" />
     <ClInclude Include="CanonicalNN\Cost.hpp" />
     <ClInclude Include="CanonicalNN\Layers.hpp" />
@@ -170,7 +176,7 @@
     <Text Include="CanonicalNN\mnist_testing.txt" />
     <Text Include="CanonicalNN\mnist_training.txt" />
     <Text Include="CanonicalNN\mnist_validation.txt" />
-    <Text Include="CanonicalNN\Structure and ideas.txt" />
+    <Text Include="CanonicalNN\Structure_and_ideas.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

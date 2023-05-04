@@ -12,14 +12,17 @@ private:
 	// ff for a single training input
 	std::vector<double> feedForward(std::vector<double>);
 	// maybe specified by user
-	std::vector<bool> oneHotEncode(int);
-	void backprop(const std::vector<double>&, const std::vector<bool>&);
-	void gradientDescent(const std::vector<std::vector<double>>&, const std::vector<std::vector<bool>>&, double, unsigned);
-	double calculateCost(const std::vector<std::vector<double>>&, const std::vector<std::vector<bool>>&);
+	std::vector<double> oneHotEncode(double);
+	void backprop(const std::vector<double>&, const std::vector<double>&);
+	void gradientDescent(const std::vector<std::vector<double>>&, const std::vector<std::vector<double>>&, double, unsigned);
+	double calculateCost(const std::vector<std::vector<double>>&, const std::vector<std::vector<double>>&);
+	unsigned calculateAccuracy(const std::vector<std::vector<double>>&, const std::vector<std::vector<double>>&);
 	std::vector<std::vector<std::vector<double>>> miniBatchSplit(const std::vector<std::vector<double>>&, unsigned);
+	void computeNumericalGradients(const std::vector<std::vector<double>>&);
 public:
 	Sequential(std::initializer_list<Dense> list);
-	void train(const std::vector<std::vector<double>>&, const std::vector<int>&, unsigned, double, unsigned);
+	void train(const std::vector<std::vector<double>>&, const std::vector<double>&, unsigned, double, unsigned);
+	unsigned predict(const std::vector<double>&);
 	// compile, fit, predict, save
 };
 

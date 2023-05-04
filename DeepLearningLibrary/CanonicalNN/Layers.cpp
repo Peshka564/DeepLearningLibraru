@@ -12,24 +12,17 @@ weights({}), biases({}), output({}), gradientWeights({}), gradientBiases({})
 
 // Initialize weights and biases(currently to zero)
 void Dense::initializeParams(size_t nodes) {
-	std::cout << nodes << ", " << nodesOut << std::endl;
 	nodesIn = nodes;
-	
-	// generate random numbers from normal distribution
-	std::random_device rd;
-	std::mt19937 e2(rd());
-	e2.seed(8923892);
-	std::normal_distribution<> dist(0, 1);
 
 	weights = std::vector<std::vector<double>>(nodesOut, std::vector<double>(nodes));
 	for (size_t i = 0; i < weights.size(); i++) {
 		for (size_t j = 0; j < weights[0].size(); j++) {
-			weights[i][j] = dist(e2);
+			weights[i][j] = utils::normalDistr();
 		}
 	}
 	biases = std::vector<double>(nodesOut);
 	for (size_t i = 0; i < biases.size(); i++) {
-		biases[i] = dist(e2);
+		biases[i] = utils::normalDistr();
 	}
 	output = std::vector<double>(nodesOut);
 
