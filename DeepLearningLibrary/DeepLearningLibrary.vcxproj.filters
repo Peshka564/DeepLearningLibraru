@@ -54,6 +54,9 @@
     <ClCompile Include="AutogradBasedNN\nnTestAutograd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AutogradBasedNN\exprTreeTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Misc\utils\vector.hpp">

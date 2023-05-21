@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AutogradBasedNN\exprTreeTest.cpp" />
     <ClCompile Include="AutogradBasedNN\Layer.cpp" />
     <ClCompile Include="AutogradBasedNN\MLP.cpp" />
     <ClCompile Include="AutogradBasedNN\Neuron.cpp" />
