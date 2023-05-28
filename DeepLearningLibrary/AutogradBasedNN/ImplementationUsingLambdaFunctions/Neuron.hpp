@@ -13,6 +13,10 @@ public:
 	std::vector<Value> weightedOutputs;
 	Value activatedOutput;
 	Value bias;
+
+	// Expression* beginning/output;
+	// Expresion* weights
+	// Expression* bias
 public:
 	Neuron(size_t);
 	Value activate(std::vector<Value>&);

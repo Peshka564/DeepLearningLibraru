@@ -140,30 +140,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AutogradBasedNN\exprTreeTest.cpp" />
-    <ClCompile Include="AutogradBasedNN\Layer.cpp" />
-    <ClCompile Include="AutogradBasedNN\MLP.cpp" />
-    <ClCompile Include="AutogradBasedNN\Neuron.cpp" />
-    <ClCompile Include="AutogradBasedNN\nnTestAutograd.cpp" />
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingExpressionTree\Expression.cpp" />
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingExpressionTree\exprTreeTest.cpp" />
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\Layer.cpp" />
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\MLP.cpp" />
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\Neuron.cpp" />
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\nnTestAutograd.cpp" />
     <ClCompile Include="CanonicalNN\Activation.cpp" />
     <ClCompile Include="CanonicalNN\Cost.cpp" />
     <ClCompile Include="CanonicalNN\Layers.cpp" />
     <ClCompile Include="CanonicalNN\nnTest.cpp" />
     <ClCompile Include="CanonicalNN\Models.cpp" />
-    <ClCompile Include="AutogradBasedNN\scalarEngine\engine.cpp" />
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\scalarEngine\engine.cpp" />
     <ClCompile Include="CanonicalNN\Utils.cpp" />
     <ClCompile Include="Misc\utils\vector.cpp" />
     <ClCompile Include="Misc\vectorTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AutogradBasedNN\Layer.hpp" />
-    <ClInclude Include="AutogradBasedNN\MLP.hpp" />
-    <ClInclude Include="AutogradBasedNN\Neuron.hpp" />
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingExpressionTree\Expression.hpp" />
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\Layer.hpp" />
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\MLP.hpp" />
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\Neuron.hpp" />
     <ClInclude Include="CanonicalNN\Activation.hpp" />
     <ClInclude Include="CanonicalNN\Cost.hpp" />
     <ClInclude Include="CanonicalNN\Layers.hpp" />
     <ClInclude Include="CanonicalNN\Models.hpp" />
-    <ClInclude Include="AutogradBasedNN\scalarEngine\engine.hpp" />
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\scalarEngine\engine.hpp" />
     <ClInclude Include="CanonicalNN\Utils.hpp" />
     <ClInclude Include="Misc\utils\vector.hpp" />
   </ItemGroup>

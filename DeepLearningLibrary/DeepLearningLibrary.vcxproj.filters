@@ -39,22 +39,25 @@
     <ClCompile Include="Misc\vectorTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AutogradBasedNN\scalarEngine\engine.cpp">
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\scalarEngine\engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AutogradBasedNN\MLP.cpp">
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\MLP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AutogradBasedNN\Neuron.cpp">
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\Neuron.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AutogradBasedNN\Layer.cpp">
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\Layer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AutogradBasedNN\nnTestAutograd.cpp">
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\nnTestAutograd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AutogradBasedNN\exprTreeTest.cpp">
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingExpressionTree\exprTreeTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingExpressionTree\Expression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,16 +80,19 @@
     <ClInclude Include="CanonicalNN\Utils.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AutogradBasedNN\scalarEngine\engine.hpp">
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\scalarEngine\engine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AutogradBasedNN\MLP.hpp">
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\MLP.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AutogradBasedNN\Neuron.hpp">
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\Neuron.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AutogradBasedNN\Layer.hpp">
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\Layer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingExpressionTree\Expression.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

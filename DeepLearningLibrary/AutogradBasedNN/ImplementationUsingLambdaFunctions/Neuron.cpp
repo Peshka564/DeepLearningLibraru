@@ -1,6 +1,6 @@
 #include <stdexcept>
 #include "Neuron.hpp"
-#include "../CanonicalNN/Utils.hpp"
+#include "../..//CanonicalNN/Utils.hpp"
 
 Neuron::Neuron(size_t nodesIn) : bias(utils::normalDistr()), inputs(nodesIn - 1), weightedOutputs(nodesIn) {
 	if (!nodesIn) throw std::invalid_argument("Empty weights");
