@@ -141,7 +141,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AutogradBasedNN\ImplementationUsingExpressionTree\Expression.cpp" />
-    <ClCompile Include="AutogradBasedNN\ImplementationUsingExpressionTree\exprTreeTest.cpp" />
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingExpressionTree\ExprNeuron.cpp" />
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingExpressionTree\test.cpp" />
     <ClCompile Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\Layer.cpp" />
     <ClCompile Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\MLP.cpp" />
     <ClCompile Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\Neuron.cpp" />
@@ -157,7 +158,12 @@
     <ClCompile Include="Misc\vectorTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingExpressionTree\Add.hpp" />
     <ClInclude Include="AutogradBasedNN\ImplementationUsingExpressionTree\Expression.hpp" />
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingExpressionTree\Literal.hpp" />
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingExpressionTree\Mult.hpp" />
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingExpressionTree\ExprNeuron.hpp" />
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingExpressionTree\Sigmoid.hpp" />
     <ClInclude Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\Layer.hpp" />
     <ClInclude Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\MLP.hpp" />
     <ClInclude Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\Neuron.hpp" />

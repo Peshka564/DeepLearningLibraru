@@ -5,7 +5,7 @@
 
 class Sigmoid : public Expression {
 public:
-	Sigmoid(Expression* left, Expression* right) : Expression(left, nullptr) {}
+	Sigmoid(Expression* left) : Expression(left, nullptr) {}
 
 	double eval() const {
 		return 1 / (1 + std::exp(-left->eval()));

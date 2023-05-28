@@ -54,10 +54,13 @@
     <ClCompile Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\nnTestAutograd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AutogradBasedNN\ImplementationUsingExpressionTree\exprTreeTest.cpp">
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingExpressionTree\Expression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AutogradBasedNN\ImplementationUsingExpressionTree\Expression.cpp">
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingExpressionTree\ExprNeuron.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AutogradBasedNN\ImplementationUsingExpressionTree\test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -93,6 +96,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AutogradBasedNN\ImplementationUsingExpressionTree\Expression.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingExpressionTree\Literal.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingExpressionTree\Add.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingExpressionTree\Mult.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingExpressionTree\Sigmoid.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AutogradBasedNN\ImplementationUsingExpressionTree\ExprNeuron.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
