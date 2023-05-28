@@ -51,3 +51,7 @@ Expression& Expression::operator=(Expression&& e) {
 	}
 	return *this;
 }
+
+void Expression::backward() {
+
+}

@@ -7,6 +7,7 @@ protected:
 	double grad;
 
 	static Expression* copyChildPointer(Expression* e);
+	void backward();
 public:
 	Expression(Expression* left, Expression* right);
 	Expression(const Expression& e);
@@ -18,6 +19,7 @@ public:
 
 	virtual double eval() const = 0;
 	virtual Expression* clone() const = 0;
+	void backprop();
 };
 
 #endif
