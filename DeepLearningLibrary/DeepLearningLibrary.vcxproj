@@ -72,6 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -150,6 +152,7 @@
     <ClCompile Include="CanonicalNN\Activation.cpp" />
     <ClCompile Include="CanonicalNN\Cost.cpp" />
     <ClCompile Include="CanonicalNN\Layers.cpp" />
+    <ClCompile Include="CanonicalNN\mnistReader.cpp" />
     <ClCompile Include="CanonicalNN\nnTest.cpp" />
     <ClCompile Include="CanonicalNN\Models.cpp" />
     <ClCompile Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\scalarEngine\engine.cpp" />
@@ -170,6 +173,7 @@
     <ClInclude Include="CanonicalNN\Activation.hpp" />
     <ClInclude Include="CanonicalNN\Cost.hpp" />
     <ClInclude Include="CanonicalNN\Layers.hpp" />
+    <ClInclude Include="CanonicalNN\mnistReader.hpp" />
     <ClInclude Include="CanonicalNN\Models.hpp" />
     <ClInclude Include="AutogradBasedNN\ImplementationUsingLambdaFunctions\scalarEngine\engine.hpp" />
     <ClInclude Include="CanonicalNN\Utils.hpp" />
@@ -178,6 +182,10 @@
   <ItemGroup>
     <None Include=".gitattributes" />
     <None Include=".gitignore" />
+    <None Include="CanonicalNN\t10k-images.bin" />
+    <None Include="CanonicalNN\t10k-labels.bin" />
+    <None Include="CanonicalNN\train-images.bin" />
+    <None Include="CanonicalNN\train-labels.bin" />
     <None Include="LICENSE" />
     <None Include="README.md" />
   </ItemGroup>

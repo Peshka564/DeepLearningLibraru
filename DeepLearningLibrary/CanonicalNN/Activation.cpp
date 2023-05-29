@@ -6,6 +6,5 @@ double activation::sigmoid(double input) {
 }
 
 double activation::sigmoidPrime(double input) {
-	double y = std::exp(-input);
-	return y / ((1 + y) * (1 + y));
+	return activation::sigmoid(input) * (1 - activation::sigmoid(input));
 }

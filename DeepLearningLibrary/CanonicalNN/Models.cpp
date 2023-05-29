@@ -8,9 +8,7 @@
 #include "Utils.hpp"
 #include "Cost.hpp"
 
-Sequential::Sequential(std::initializer_list<Dense> list) : layers(list) {
-	if (!layers.size()) throw std::exception();
-};
+Sequential::Sequential(std::initializer_list<Dense> list) : layers(list) {}
 
 std::vector<double> Sequential::feedForward(std::vector<double> trainingInput) {
 	for (size_t i = 0; i < layers.size(); i++) {
@@ -22,8 +20,7 @@ std::vector<double> Sequential::feedForward(std::vector<double> trainingInput) {
 double Sequential::calculateCost(const std::vector<std::vector<double>>& trainingData, const std::vector<std::vector<double>>& labels) {
 	double res = 0;
 	for (size_t i = 0; i < trainingData.size(); i++) {
-		std::vector<double> goodLabels(labels[i].begin(), labels[i].end());
-		res += cost::MSE(feedForward(trainingData[i]), goodLabels);
+		res += cost::MSE(feedForward(trainingData[i]), labels[i]);
 	}
 	return res / trainingData.size();
 }
@@ -48,19 +45,9 @@ unsigned Sequential::predict(const std::vector<double>& trainingInput) {
 unsigned Sequential::calculateAccuracy(const std::vector<std::vector<double>>& trainingData, const std::vector<std::vector<double>>& labels) {
 	unsigned res = 0;
 	for (size_t i = 0; i < trainingData.size(); i++) {
-		//std::cout << predict(trainingData[i]) << " ";
-		if (labels[i][predict(trainingData[i])]) res++;
+		if (labels[i][predict(trainingData[i])] == 1) res++;
 	}
 	return res;
-}
-
-// 10 outputs representing each digit guess - {0, 1}
-std::vector<double> Sequential::oneHotEncode(double label) {
-	std::vector<double> ohe(10);
-	for (int i = 0; i < 10; i++) {
-		if (i == label) ohe[i] = 1;
-	}
-	return ohe;
 }
 
 std::vector<std::vector<std::vector<double>>> Sequential::miniBatchSplit(const std::vector<std::vector<double>>& trainingData, unsigned miniBatchSize) {
@@ -97,14 +84,14 @@ void Sequential::backprop(const std::vector<double>& trainingInput, const std::v
 
 	for (int i = layers.size() - 1; i >= 0; i--) {
 		if (i) {
-			layers[i].computeGradients(layers[(size_t)i - 1].getActivatedOutput());
+			layers[i].computeGradients(layers[i - 1].getActivatedOutput());
 			std::vector<double> error = layers[i].computePreviousError();
-			layers[(size_t)i - 1].setError(error);
+			layers[i - 1].setError(error);
 		}
 		else {
-			layers[i].computeGradients(trainingInput);
 			// custom compute gradient - just use training input
-			// im gonna add input layer and stop at the layer before it
+			layers[i].computeGradients(trainingInput);
+			// TO DO: add input layer and stop at the layer before it
 		}
 	}
 }
@@ -133,17 +120,21 @@ void Sequential::gradientDescent(const std::vector<std::vector<double>>& trainin
 	}
 }
 
-void Sequential::train(const std::vector<std::vector<double>>& trainingData, const std::vector<double>& answers, unsigned epochs, double learningRate, unsigned batchSize) {
-	// generate labels - maybe specified by user
-	std::vector<std::vector<double>> labels(answers.size(), std::vector<double>(10));
-	for (size_t i = 0; i < answers.size(); i++) {
-		labels[i] = oneHotEncode(answers[i]);
-	}
-	// >check for empty training data
+void Sequential::train(const std::vector<std::vector<double>>& trainingData, const std::vector<std::vector<double>>& labels, unsigned epochs, double learningRate, unsigned batchSize, const std::vector<double>& answers) {
+	// labels are specified by user
+	// maybe add sparse loss to fix that and onehot encode it automatically
+
+	// checks
+	if (trainingData.size() != labels.size()) throw std::invalid_argument("Invalid number of (data, labels)");
+	if (!trainingData.size()) throw std::invalid_argument("No data is not allowed");
+
+	// layer initialization
 	layers[0].initializeParams(trainingData[0].size());
 	for (size_t i = 1; i < layers.size(); i++) {
 		layers[i].initializeParams(layers[i - 1].getNodesOut());
 	}
+
+	// main training loop
 	for (unsigned epoch = 1; epoch <= epochs; epoch++) {
 		std::cout << "-----------------------------------------------" << std::endl;
 		std::cout << "Epoch: " << epoch << std::endl;
@@ -157,8 +148,15 @@ void Sequential::train(const std::vector<std::vector<double>>& trainingData, con
 		// evaluate accuracy
 		std::cout << "Accuracy: " << calculateAccuracy(trainingData, labels) /* * 100.0 / trainingData.size()*/ << std::endl;
 
+		/*for (size_t i = 0; i < 50; i++) {
+			std::vector<double> pred = feedForward(trainingData[i]);
+			for (size_t j = 0; j < pred.size(); j++) {
+				std::cout << pred[j] << ' ';
+			}
+			std::cout << answers[i] << ' ' << labels[i][predict(trainingData[i])] << ' ' << labels[i][answers[i]] << std::endl;
+		}*/
 		std::cout << "-----------------------------------------------" << std::endl;
 
-		// add comparison with numerical gradient
+		// TO DO: add comparison with numerical gradient for testing purposes
 	}
 }

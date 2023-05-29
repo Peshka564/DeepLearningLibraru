@@ -24,9 +24,8 @@ private:
 	// partial derivative of cost with respect to weighted output(z)
 	std::vector<double> gradientOutput;
 public:
-	Dense() = default;
 	Dense(size_t nodes);
-	size_t getNodesOut() const ;
+	size_t getNodesOut() const;
 	void initializeParams(size_t);
 	std::vector<double> calculateOutput(std::vector<double>&);
 	std::vector<double> getActivatedOutput();

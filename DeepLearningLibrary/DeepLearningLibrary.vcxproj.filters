@@ -63,6 +63,9 @@
     <ClCompile Include="AutogradBasedNN\ImplementationUsingExpressionTree\test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CanonicalNN\mnistReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Misc\utils\vector.hpp">
@@ -113,12 +116,27 @@
     <ClInclude Include="AutogradBasedNN\ImplementationUsingExpressionTree\ExprNeuron.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CanonicalNN\mnistReader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE" />
     <None Include="README.md" />
     <None Include=".gitattributes" />
     <None Include=".gitignore" />
+    <None Include="CanonicalNN\t10k-labels.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="CanonicalNN\t10k-images.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="CanonicalNN\train-images.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="CanonicalNN\train-labels.bin">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CanonicalNN\mnist_testing.txt" />

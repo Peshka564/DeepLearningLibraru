@@ -10,11 +10,11 @@ Dense::Dense(size_t nodes) : nodesOut(nodes), nodesIn(0),
 weights({}), biases({}), output({}), gradientWeights({}), gradientBiases({})
 {};
 
-// Initialize weights and biases(currently to zero)
+// Initialize weights and biases
 void Dense::initializeParams(size_t nodes) {
 	nodesIn = nodes;
 
-	weights = std::vector<std::vector<double>>(nodesOut, std::vector<double>(nodes));
+	weights = std::vector<std::vector<double>>(nodesOut, std::vector<double>(nodesIn));
 	for (size_t i = 0; i < weights.size(); i++) {
 		for (size_t j = 0; j < weights[0].size(); j++) {
 			weights[i][j] = utils::normalDistr();
@@ -27,9 +27,8 @@ void Dense::initializeParams(size_t nodes) {
 	output = std::vector<double>(nodesOut);
 
 	// must be zeros
-	gradientWeights = std::vector<std::vector<double>>(nodesOut, std::vector<double>(nodes, 0));
+	gradientWeights = std::vector<std::vector<double>>(nodesOut, std::vector<double>(nodesIn, 0));
 	gradientBiases = std::vector<double>(nodesOut, 0);
-	gradientOutput = std::vector<double>(nodesOut);
 }
 
 size_t Dense::getNodesOut() const {
@@ -45,22 +44,22 @@ std::vector<double> Dense::calculateOutput(std::vector<double>& input) {
 }
 
 std::vector<double> Dense::computePreviousError() {
-	// Zk,l+1 = sum(j) Wkj*Ajl + Bkl
-	// d(Zk,l+1) / d(Zj,l) = wkj*sigm'(Zj,l)
-	// and d(C)/d(Zj,l) = sum(k) d(Zk,l+1) / d(Zj,l)*DELTAk,l+1
-	// transpose because we sum Wkj over k
+	// transpose because we sum Wkp over k
+	// it is correct, I think
 	return utils::matmul(utils::transpose(weights), gradientOutput);
 }
 
 void Dense::computeGradients(const std::vector<double>& prevOutput) {
 	// z = a(l-1) * w + b
+	
 	// biases
 	// dC / db = dC / dz * dz / db
 	// dz / db = 1 => dC / db = dC / dz
+	gradientBiases = gradientOutput;
+
 	// weights
 	// dC / dw = dC / dz * dz / dw
 	// dz / dw = a(l-1) => dC / dw = dC / dz * a(l - 1)
-	gradientBiases = gradientOutput;
 	for (size_t i = 0; i < weights.size(); i++) {
 		for (size_t j = 0; j < weights[0].size(); j++) {
 			gradientWeights[i][j] = prevOutput[j] * gradientOutput[i];
@@ -69,7 +68,7 @@ void Dense::computeGradients(const std::vector<double>& prevOutput) {
 }
 
 void Dense::updateParameters(size_t numSamples, double learningRate) {
-	// w = w - eta * gradient
+	// w = w - learningRate * gradient
 	// average over all of them
 	for (size_t i = 0; i < weights.size(); i++) {
 		for (size_t j = 0; j < weights[0].size(); j++) {

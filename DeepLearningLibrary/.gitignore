@@ -8,6 +8,7 @@ mnist*.txt
 /Misc/
 Structure_and_ideas.txt
 /AutogradBasedNN/ImplementationUsingExpressionTree/
+*.bin
 
 # User-specific files
 *.rsuser

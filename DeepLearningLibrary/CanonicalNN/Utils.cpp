@@ -4,6 +4,8 @@
 #include <random>
 #include "Utils.hpp"
 
+// TO DO: np vectorize like optimization
+
 double utils::dotProduct(const std::vector<double>& a, const std::vector<double>& b) {
 	if (a.size() != b.size()) throw std::invalid_argument("Not of equal size");
 	double res = 0;
