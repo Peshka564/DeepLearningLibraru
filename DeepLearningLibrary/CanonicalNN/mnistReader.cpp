@@ -1,4 +1,5 @@
 #include "mnistReader.hpp"
+#include <iostream>
 
 // this is needed because mnist data is backwards...idk
 int reverseInt(int i)
@@ -29,12 +30,14 @@ void MNISTReadTrainingImages(std::vector<std::vector<double>>& training_x) {
 	std::cout << "Training_x magicNumber: " << magicNumber << std::endl;
 	std::cout << "Training_x number of images: " << numberOfImages << std::endl;
 	std::cout << "Training_x dim rows: " << rows << std::endl;
-	std::cout << "Training_y dim cols: " << cols << std::endl;
+	std::cout << "Training_x dim cols: " << cols << std::endl;
 
 	for (int i = 0; i < numberOfImages; i++) {
 		training_x.push_back(std::vector<double>(rows * cols));
 		for (int j = 0; j < rows * cols; j++) {
-			fin.read((char*)&training_x[i][j], sizeof(training_x[i][j]));
+			unsigned char temp;
+			fin.read((char*)&temp, sizeof(temp));
+			training_x[i][j] = (int)temp;
 		}
 	}
 
@@ -54,12 +57,22 @@ void MNISTReadTrainingLabels(std::vector<double>& training_y) {
 	std::cout << "Training_y number of labels: " << numberOfItems << std::endl;
 
 	for (int i = 0; i < numberOfItems; i++) {
-		double temp;
+		unsigned char temp;
 		fin.read((char*)&temp, sizeof(temp));
-		training_y.push_back(temp);
+		training_y.push_back((double)temp);
 	}
 
 	fin.close();
+}
+
+void drawDigit(const std::vector<double>& pixelValues) {
+	for (size_t i = 0; i < 28; i++) {
+		for (size_t j = 0; j < 28; j++) {
+			if (pixelValues[i * 28 + j]) std::cout << "@";
+			else std::cout << ".";
+		}
+		std::cout << std::endl;
+	}
 }
 
 void readFile(const char* name, std::vector<std::vector<double>>& x, std::vector<double>& y, size_t numSamples) {
@@ -104,7 +117,7 @@ void benchmarkPerformance() {
 	std::vector<std::vector<double>> training_x;
 	std::vector<double> training_y;
 	auto t1 = std::chrono::high_resolution_clock::now();
-	MNISTReadTrainingImages(training_x);
+	//MNISTReadTrainingImages(training_x);
 	MNISTReadTrainingLabels(training_y);
 	auto t2 = std::chrono::high_resolution_clock::now();
 	auto ms_int = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1);

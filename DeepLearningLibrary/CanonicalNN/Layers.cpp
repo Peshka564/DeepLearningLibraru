@@ -7,7 +7,7 @@
 
 // maybe init here
 Dense::Dense(size_t nodes) : nodesOut(nodes), nodesIn(0),
-weights({}), biases({}), output({}), gradientWeights({}), gradientBiases({})
+weights({}), biases({}), outputs({}), activatedOutputs({}), gradientWeights({}), gradientBiases({})
 {};
 
 // Initialize weights and biases
@@ -24,23 +24,20 @@ void Dense::initializeParams(size_t nodes) {
 	for (size_t i = 0; i < biases.size(); i++) {
 		biases[i] = utils::normalDistr();
 	}
-	output = std::vector<double>(nodesOut);
+	outputs = std::vector<double>(nodesOut);
+	activatedOutputs = std::vector<double>(nodesOut);
 
 	// must be zeros
 	gradientWeights = std::vector<std::vector<double>>(nodesOut, std::vector<double>(nodesIn, 0));
 	gradientBiases = std::vector<double>(nodesOut, 0);
 }
 
-size_t Dense::getNodesOut() const {
-	return nodesOut;
-}
-
-// Weighted output
 std::vector<double> Dense::calculateOutput(std::vector<double>& input) {
 	for (size_t i = 0; i < nodesOut; i++) {
-		output[i] = activation::sigmoid(utils::dotProduct(weights[i], input) + biases[i]);
+		outputs[i] = utils::dotProduct(weights[i], input) + biases[i];
+		activatedOutputs[i] = activation::sigmoid(outputs[i]);
 	}
-	return output;
+	return activatedOutputs;
 }
 
 std::vector<double> Dense::computePreviousError() {
@@ -83,19 +80,11 @@ void Dense::updateParameters(size_t numSamples, double learningRate) {
 	gradientBiases = std::vector<double>(nodesOut, 0);
 }
 
-std::vector<double> Dense::getActivatedOutput() {
-	std::vector<double> activatedOutput(output.size());
-	for (size_t i = 0; i < output.size(); i++) {
-		activatedOutput[i] = activation::sigmoid(output[i]);
-	}
-	return activatedOutput;
-}
-
 void Dense::setError(const std::vector<double>& error) {
 	// dC/dz = dC/da * da/dz = dC/da * sigmoid'(z)
-	std::vector<double> activatedOutput(output.size());
-	for (size_t i = 0; i < output.size(); i++) {
-		activatedOutput[i] = activation::sigmoidPrime(output[i]);
+	std::vector<double> chainRuleMult(outputs.size());
+	for (size_t i = 0; i < outputs.size(); i++) {
+		chainRuleMult[i] = activation::sigmoidPrime(outputs[i]);
 	}
-	gradientOutput = utils::multiply(activatedOutput, error);
+	gradientOutput = utils::multiply(chainRuleMult, error);
 }

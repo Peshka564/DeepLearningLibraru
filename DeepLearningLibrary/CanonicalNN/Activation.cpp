@@ -2,7 +2,7 @@
 #include "Activation.hpp"
 
 double activation::sigmoid(double input) {
-	return 1 / (1 + std::exp(-input));
+	return 1.0 / (1.0 + std::exp(-input));
 }
 
 double activation::sigmoidPrime(double input) {

@@ -80,19 +80,12 @@ void Sequential::backprop(const std::vector<double>& trainingInput, const std::v
 
 	// a - y(x) = d(MSE)/da - this will change for different cost functions
 	layers[layers.size() - 1].setError(utils::subtract(predictions, labels));
-	//layers[layers.size() - 1].computeGradients(predictions);
+	layers[layers.size() - 1].computeGradients(layers[layers.size() - 2].getActivatedOutput());
 
 	for (int i = layers.size() - 1; i >= 0; i--) {
-		if (i) {
-			layers[i].computeGradients(layers[i - 1].getActivatedOutput());
-			std::vector<double> error = layers[i].computePreviousError();
-			layers[i - 1].setError(error);
-		}
-		else {
-			// custom compute gradient - just use training input
-			layers[i].computeGradients(trainingInput);
-			// TO DO: add input layer and stop at the layer before it
-		}
+		std::vector<double> error = layers[i].computePreviousError();
+		layers[i - 1].setError(error);
+		layers[i].computeGradients(layers[i - 1].getActivatedOutput());
 	}
 }
 
@@ -134,6 +127,24 @@ void Sequential::train(const std::vector<std::vector<double>>& trainingData, con
 		layers[i].initializeParams(layers[i - 1].getNodesOut());
 	}
 
+	//for (size_t i = 0; i < 1; i++) {
+	//	std::vector<std::vector<double>> lw = layers[i].getWeights();
+	//	std::vector<double> lb = layers[i].getBiases();
+
+	//	/*for (size_t r = 0; r < lw.size(); r++) {
+	//		for (size_t c = 0; c < lw[0].size(); c++) {
+	//			std::cout << lw[r][c] << " ";
+	//		}
+	//		std::cout << std::endl;
+	//	}
+	//	std::cout << std::endl;*/
+
+	//	for (size_t j = 0; j < lb.size(); j++) {
+	//		std::cout << lb[j] << " ";
+	//	}
+	//	std::cout << std::endl;
+	//}
+	
 	// main training loop
 	for (unsigned epoch = 1; epoch <= epochs; epoch++) {
 		std::cout << "-----------------------------------------------" << std::endl;
