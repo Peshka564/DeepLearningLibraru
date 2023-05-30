@@ -80,12 +80,18 @@ void Sequential::backprop(const std::vector<double>& trainingInput, const std::v
 
 	// a - y(x) = d(MSE)/da - this will change for different cost functions
 	layers[layers.size() - 1].setError(utils::subtract(predictions, labels));
-	layers[layers.size() - 1].computeGradients(layers[layers.size() - 2].getActivatedOutput());
 
 	for (int i = layers.size() - 1; i >= 0; i--) {
-		std::vector<double> error = layers[i].computePreviousError();
-		layers[i - 1].setError(error);
-		layers[i].computeGradients(layers[i - 1].getActivatedOutput());
+		if (i) {
+			layers[i].computeGradients(layers[i - 1].getActivatedOutput());
+			std::vector<double> error = layers[i].computePreviousError();
+			layers[i - 1].setError(error);
+		}
+		else {
+			// custom compute gradient - just use training input
+			layers[i].computeGradients(trainingInput);
+			// TO DO: add input layer for cleaner code
+		}
 	}
 }
 
@@ -106,10 +112,10 @@ void Sequential::gradientDescent(const std::vector<std::vector<double>>& trainin
 	for (size_t i = 0; i < trainingData.size(); i++) {
 		// backprop and find gradients
 		backprop(trainingData[i], labels[i]);
-		for (Dense& d : layers) {
-			// adjust weights and biases
-			d.updateParameters(trainingData.size(), learningRate);
-		}
+	}
+	for (Dense& d : layers) {
+		// adjust weights and biases
+		d.updateParameters(trainingData.size(), learningRate);
 	}
 }
 

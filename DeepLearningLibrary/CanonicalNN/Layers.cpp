@@ -52,14 +52,14 @@ void Dense::computeGradients(const std::vector<double>& prevOutput) {
 	// biases
 	// dC / db = dC / dz * dz / db
 	// dz / db = 1 => dC / db = dC / dz
-	gradientBiases = gradientOutput;
+	gradientBiases = utils::add(gradientBiases, gradientOutput);
 
 	// weights
 	// dC / dw = dC / dz * dz / dw
 	// dz / dw = a(l-1) => dC / dw = dC / dz * a(l - 1)
 	for (size_t i = 0; i < weights.size(); i++) {
 		for (size_t j = 0; j < weights[0].size(); j++) {
-			gradientWeights[i][j] = prevOutput[j] * gradientOutput[i];
+			gradientWeights[i][j] += prevOutput[j] * gradientOutput[i];
 		}
 	}
 }
