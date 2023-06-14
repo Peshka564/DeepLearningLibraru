@@ -5,6 +5,6 @@ A c++ implementation of the neural network architecture in two different ways:
 
 /AutogradBasedNN - a neural network implementation(currently only an autograd engine) following Andrej Karpathy's micrograd
 
-	/ImplementationUsingLambdaFunctions - method used in Karpathy's code
+\t/ImplementationUsingLambdaFunctions - method used in Karpathy's code
 
-	/ImplementationUsingExpressionTree - the same method but using expression trees for cleaner implementation in C++
+\t/ImplementationUsingExpressionTree - the same method but using expression trees for cleaner implementation in C++
